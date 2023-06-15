@@ -17,6 +17,7 @@ pipeline {
         stage('Build') {
             options {
               timeout(time: 30)  // timeout on this stage
+              timestamps ()
             }
             steps {
                 echo "Database engine is ${DB_ENGINE}"
@@ -28,6 +29,9 @@ pipeline {
             agent {
                 docker { image 'maven:3-alpine' }
             }
+            options {
+              timestamps ()
+            }
             steps {
                 sh 'mvn --version'
             }
@@ -35,6 +39,9 @@ pipeline {
         stage('Check java version') {
             agent {
                 docker { image 'openjdk:8-jre' }
+            }
+            options {
+              timestamps ()
             }
             steps {
                 sh 'java -version'
