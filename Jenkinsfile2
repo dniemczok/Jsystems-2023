@@ -15,6 +15,9 @@ pipeline {
     }
     stages {
         stage('Build') {
+            options {
+              timeout(time: 30, unit: 'SEC')   // timeout on this stage
+            }
             steps {
                 echo "Database engine is ${DB_ENGINE}"
                 echo "DISABLE_AUTH is ${DISABLE_AUTH}"
