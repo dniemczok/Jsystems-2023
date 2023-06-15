@@ -1,5 +1,9 @@
 pipeline {
-    agent label "slave01"
+    agent {
+        node {
+            label 'slave01'
+            }
+    }
     stages {
         stage('Check maven version') {
             agent {
