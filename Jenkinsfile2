@@ -7,6 +7,7 @@ pipeline {
     environment {
         DISABLE_AUTH = 'true'
         DB_ENGINE    = 'sqlite'
+        ENV_URL2 = "${env.JENKINS_URL}"
     }
     options {
         buildDiscarder(logRotator(numToKeepStr: '7', artifactNumToKeepStr: '7'))
@@ -18,7 +19,7 @@ pipeline {
             steps {
                 echo "Database engine is ${DB_ENGINE}"
                 echo "DISABLE_AUTH is ${DISABLE_AUTH}"
-                echo ${env.JENKINS_URL}
+                echo ${ENV_URL2}
             }
         }
         stage('Check maven version') {
