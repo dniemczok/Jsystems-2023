@@ -4,6 +4,11 @@ pipeline {
             label 'slave01'
             }
     }
+    options {
+        buildDiscarder(logRotator(numToKeepStr: '7', artifactNumToKeepStr: '7'))
+        timeout(time: 5)
+        timestamps ()
+    }
     stages {
         stage('Check maven version') {
             agent {
