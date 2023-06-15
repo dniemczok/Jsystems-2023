@@ -47,5 +47,13 @@ pipeline {
                 sh 'java -version'
             }
         }
+        
+
+        stage('Clear') {
+            steps {
+                step([$class: 'WsCleanup'])
+            }
+        }
+
     }
 }
