@@ -1,56 +1,9 @@
 pipeline {
-    agent {
-        node {
-            label 'slave01'
-            }
-    }
-    environment {
-        DISABLE_AUTH = 'true'
-        DB_ENGINE    = 'sqlite'
-    }
-    options {
-        buildDiscarder(logRotator(numToKeepStr: '7', artifactNumToKeepStr: '7'))
-        timeout(time: 5)
-        timestamps ()
-    }
+    agent any
     stages {
         stage('Build') {
-            options {
-              timeout(time: 30)  // timeout on this stage
-              timestamps ()
-            }
             steps {
                 input 'Zaakceptuj'
-                echo "Database engine is ${DB_ENGINE}"
-                echo "DISABLE_AUTH is ${DISABLE_AUTH}"
-                echo "${env.JENKINS_URL}"
-            }
-        }
-        stage('Check maven version') {
-            agent {
-                docker { image 'maven:3-alpine' }
-            }
-            options {
-              timestamps ()
-            }
-            steps {
-                sh 'mvn --version'
-            }
-        }
-        stage('Check java version') {
-            agent {
-                docker { image 'openjdk:8-jre' }
-            }
-            options {
-              timestamps ()
-            }
-            steps {
-                sh 'java -version'
-            }
-        }
-        
-                stage('Build') {
-            steps {
                 sh 'echo "Building the application"'
                 // Add commands to build application
             }
@@ -78,14 +31,5 @@ pipeline {
                 // Add commands to deploy application
             }
         }
-    }
-
-        
-        stage('Clear') {
-            steps {
-                step([$class: 'WsCleanup'])
-            }
-        }
-
     }
 }
