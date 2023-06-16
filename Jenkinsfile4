@@ -1,19 +1,33 @@
 pipeline {
     agent any
+    parameters {
+        choice (name: 'Environment', choices:['dev','stage','prod'], description: 'Environment name for deployment')
+    }
     stages {
-        stage('Build') {
+        stage('Dev') {
             steps {
-                input 'Zaakceptuj'
-                sh 'echo "Building the application"'
+                sh 'echo "Building the application DEV"'
                 // Add commands to build application
+                when {
+                    environment name: 'Environment', value: 'dev'
+                }
+                steps { 
+                    echo "Deploying dev"
+                }
             }
         }
 
-        stage('Deploy') {
-            steps {
-                sh 'echo "Deploying the application"'
-                // Add commands to deploy application
+        stage('PRO') {
+            when {
+                anyOf {
+                    expression { params.environment == 'prod' }
+                }
+                // Opcjonalnie 
+                // when { expression { params.environment == 'demo'  }
             }
+            steps {
+                echo "Deployment on PROD"
+            } 
         }
 
 }
