@@ -47,6 +47,7 @@ pipeline {
                     steps {
                         sh 'echo "Running integration tests"'
                         // Add commands to run integration tests
+                        ecit 1
                     }
                 }
     }
