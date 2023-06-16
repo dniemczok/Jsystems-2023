@@ -1,0 +1,19 @@
+pipeline {
+    agent any
+    stages {
+        stage('Build') {
+            steps {
+                input 'Zaakceptuj'
+                sh 'echo "Building the application"'
+                // Add commands to build application
+            }
+        }
+
+        stage('Deploy') {
+            steps {
+                sh 'echo "Deploying the application"'
+                // Add commands to deploy application
+            }
+        }
+
+}
