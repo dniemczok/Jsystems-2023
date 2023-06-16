@@ -23,6 +23,18 @@ pipeline {
                         // Add commands to run integration tests
                     }
                 }
+                stage('Integration Tests2') {
+                    steps {
+                        sh 'echo "Running integration tests"'
+                        // Add commands to run integration tests
+                    }
+                }
+                stage('Integration Tests3') {
+                    steps {
+                        sh 'echo "Running integration tests"'
+                        // Add commands to run integration tests
+                    }
+                }
             }
         }
         stage('Deploy') {
@@ -31,5 +43,11 @@ pipeline {
                 // Add commands to deploy application
             }
         }
+        stage('Deploy2') {
+                    steps {
+                        sh 'echo "Running integration tests"'
+                        // Add commands to run integration tests
+                    }
+                }
     }
 }
